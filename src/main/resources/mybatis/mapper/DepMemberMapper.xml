@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.DepMemberMapper">
+    <insert id="addDepMember">
+        insert into dep_member(member_id, department_id, department_name, user_id, position, create_time, modify_time)
+        values(#{memberId}, #{departmentId}, #{departmentName}, #{userId}, #{position}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <update id="updateMemInfo">
+        update dep_member set
+        <if test="deleted == true">
+           deleted = 1
+        </if>
+        <if test="isOld == true">
+            is_old = 1
+        </if>
+        where department_id = #{departmentId} and user_id = #{userId} and deleted = 0
+    </update>
+
+    <select id="isAddDep" resultType="DepMember">
+        select * from dep_member where department_id = #{departmentId} and user_id = #{userId}
+    </select>
+</mapper>

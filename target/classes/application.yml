@@ -1,0 +1,56 @@
+spring:
+  redis:
+    host: "127.0.0.1"
+    port: 6379
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/one_two_floor?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# mybatis分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+#端口信息配置
+server:
+  port: 9090
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.demo.pojo
+  mapperLocations: classpath:mybatis/mapper/*.xml
+#  开启驼峰命名规则自动转换
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+# token加密配置
+config:
+  jwt:
+    #加密秘钥
+    secret: abcdefg1234567
+    # token有效时长
+    expire: 3600
+    #header
+    header: token
+
+#全局设置参数
+page:
+  pageSize: 8
+
+
+
+
+
+

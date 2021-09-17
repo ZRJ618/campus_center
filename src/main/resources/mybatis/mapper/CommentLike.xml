@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.CommentLikeMapper">
+
+    <select id="selectByUserIdAndCommentId" resultType="CommentLike">
+        select user_id userId, comment_id commentId from comment_like where user_id = #{userId} and comment_id = #{commentId}
+    </select>
+
+    <insert id="insertCommentLike">
+        insert into comment_like (user_id, comment_id) values (#{userId},#{commentId})
+    </insert>
+
+</mapper>

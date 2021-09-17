@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.DepartmentMapper">
+    <select id="getDepByName" resultType="Department">
+        select * from department where department_name = #{departmentName} and deleted = 0
+    </select>
+    <select id="getDepartmentList" resultType="DepartmentModel">
+        select * from department where parent_id = #{parentId} and deleted = 0
+    </select>
+
+    <select id="getDepartmentByName" resultType="Department">
+        select * from department where parent_id = #{parentId} and deleted = 0
+    </select>
+
+    <insert id="addDepartment" parameterType="Department">
+        insert into department(department_id, department_name, parent_id, parent_name, department_grade, create_time, modify_time)
+         values(#{departmentId}, #{departmentName}, #{parentId}, #{parentName},#{departmentGrade}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <update id="updateDepartment" parameterType="Department">
+        update department set department_name = #{departmentName}, parent_id = #{parentId}, parent_name = #{parentName}, department_grade = #{departmentGrade}, modify_time = #{modifyTime} where department_id = #{departmentId} and deleted = 0
+    </update>
+
+    <update id="deleteDepartment">
+        update department set deleted = 1, modify_time = #{modifyTime} where department_id = #{departmentId}
+    </update>
+
+    <update id="addPeopleNum">
+        update department set people_num = people_num + 1 where department_id = #{departmentId}
+    </update>
+
+    <select id="getIdByDepartmentName" resultType="String">
+        select department_id from department where department_name = #{departmentName} and deleted = 0
+    </select>
+
+    <select id="getDepListByGrade" resultType="departmentModel">
+        select * from department where department_grade = #{departmentGrade} and deleted = 0
+    </select>
+
+    <select id="getDepListByParentId" resultType="departmentModel">
+        select * from department where parent_id = #{parentId} and deleted = 0
+    </select>
+
+    <select id="getDepById" resultType="department">
+        select * from department where department_id = #{departmentId}
+    </select>
+
+    <select id="getMyDep" resultType="MyDepInfo">
+        select m.department_id, m.department_name, people_num, position, parent_name, dep_image, brief_introduce
+        from department d, dep_member m, dep_introduce i
+        where d.department_id = m.department_id and d.department_id = i.department_id and m.user_id = #{userId}
+    </select>
+
+</mapper>

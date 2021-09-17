@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ArticleLabelMapper">
+
+    <select id="selectLabelByArticle" resultType="Integer">
+        select label_self_add labelSelfAdd from article_label where article_id = #{articleId}
+    </select>
+
+</mapper>

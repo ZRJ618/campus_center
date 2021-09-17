@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.InterviewInfoMapper">
+    <insert id="addInterviewInfo" parameterType="InterviewInfo">
+        insert into interview_info(interview_id, user_id, department_name, rank, know, advantage, disadvantage, create_time, modify_time)
+         values(#{interviewId}, #{userId}, #{departmentName}, #{rank}, #{know}, #{advantage}, #{disadvantage},
+         #{createTime}, #{modifyTime})
+    </insert>
+    <select id="getPersonalInterviewInfo" resultType="InterviewInfoModel">
+        select interview_id, u.user_id, department_name, rank, know, advantage, disadvantage, real_name, self_image,  major, sex
+        from user u, interview_info i where u.user_id = i.user_id and u.user_id = #{userId} and u.deleted = 0 and i.deleted = 0
+    </select>
+    <select id="getInterviewInfoByNameAndId" resultType="InterviewInfo">
+        select * from interview_info where department_name = #{departmentName} and user_id = #{userId} and deleted = 0
+    </select>
+    <select id="getInterviewListByDepartmentName" resultType="InterviewInfoModel">
+        select interview_id, u.user_id, department_name, rank, know, advantage, disadvantage, real_name, self_image, major, sex
+        from user u, interview_info i where u.user_id = i.user_id and department_name = #{departmentName} and u.deleted = 0 and i.deleted = 0
+    </select>
+    <update id="updateInterviewInfo" parameterType="InterviewInfo">
+        update interview_info set department_name = #{departmentName}, rank = #{rank}, know = #{know}, advantage = #{advantage}, disadvantage = #{disadvantage}, modify_time = #{modifyTime}
+        where interview_id = #{interviewId}
+    </update>
+    <update id="deleteInterviewInfo" parameterType="String">
+        update interview_info set deleted = 1, modify_time = #{modifyTime} where department_name = #{departmentName} and user_id = #{userId}
+    </update>
+
+</mapper>

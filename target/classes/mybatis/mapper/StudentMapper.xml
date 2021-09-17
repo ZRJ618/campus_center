@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.StudentMapper">
+    <select id="getStudentModelById" resultType="StudentModel">
+        select * from student where studentId = #{studentId} and deleted = 0
+    </select>
+    <insert id="addStudentId" parameterType="Student">
+        insert into student(userId, studentId, userName, userRealName,
+         sex, grade, major, powerId, email, headPortrait, inchPhoto,
+          createTime, modifyTime)
+        values(#{userId}, #{studentId}, #{userName}, #{userRealName},
+        #{sex}, #{grade}, #{major}, #{powerId}, #{email}, #{headPortrait},
+        #{inchPhoto}, #{createTime}, #{modifyTime})
+    </insert>
+    <update id="updateStudentInfo" parameterType="StudentModel">
+        update student set userName = #{studentModel.userName}, userRealName = #{studentModel.userRealName}, sex = #{studentModel.sex},
+        grade = #{studentModel.grade}, major = #{studentModel.major}, email = #{studentModel.email}, headPortrait = #{studentModel.headPortrait},
+        inchPhoto = #{studentModel.inchPhoto} where studentId = #{studentModel.studentId}
+
+    </update>
+    <update id="deletedStudentInfo">
+        update student set deleted = 1, modifyTime = #{modifyTime} where studentId = #{studentId}
+    </update>
+
+    <select id="getChargeManInfo" resultType="ChargeMan">
+        select * from student where studentId = #{studentId}
+    </select>
+
+    <select id="getRealName" resultType="String">
+        select UserRealName from student where studentId = #{studentId} and deleted = 0
+    </select>
+</mapper>

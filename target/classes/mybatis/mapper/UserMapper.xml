@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.UserMapper">
+
+    <insert id="addUser">
+        insert into user(user_id, student_id, password, user_name, real_name, sex, birthday, enter_school_time, major, mobile_phone, email, self_image, create_time, modify_time, activation_code)
+        values(#{userId}, #{studentId}, #{password}, #{userName}, #{realName}, #{sex}, #{birthday}, #{enterSchoolTime}, #{major}, #{mobilePhone}, #{email}, #{selfImage}, #{createTime}, #{modifyTime}, #{activationCode})
+    </insert>
+    <select id="login" resultType="UserModel">
+        select * from user where student_id = #{studentId} and password = #{password}
+    </select>
+    <select id="getUserByIdAndPass" resultType="UserModel">
+        select * from user where user_Id = #{userId} and password = #{password}
+    </select>
+    <select id="getUserById" resultType="UserModel">
+        select * from user where user_id = #{userId}
+    </select>
+    <select id="getUserByStudentId" resultType="User">
+        select * from user where student_id = #{studentId}
+    </select>
+
+    <select id="getChargeMan" resultType="ChargeMan">
+        select * from user where user_id = #{userId}
+    </select>
+
+    <update id="updatePassword">
+        update user set password = #{password}, modify_time = #{modifyTime} where user_id = #{userId}
+    </update>
+
+    <select id="getRealNameById" resultType="String">
+        select real_name from user where user_id = #{userId}
+    </select>
+
+    <select id="selectUserById" resultType="User">
+        select user_id userId, student_id studentId,password, user_name userName, real_name realName,sex,birthday, enter_school_time enterSchoolTime,
+        major, mobile_phone mobilePhone,email, self_image selfImage,create_time createTime,status, idol_sum idolSum, fans_sum fansSum
+        from user where student_id = #{studentId} and status = 1
+    </select>
+
+    <insert id="insertUser">
+        insert into user (user_id,student_id,password,status) values (#{userId},#{studentId},#{password},#{status})
+    </insert>
+
+    <update id="updateUser">
+        update user set user_id=#{userId}, student_id=#{studentId}, password=#{password}, user_name=#{userName}, real_name=#{realName}, sex=#{sex},
+        birthday=#{birthday}, enter_school_time=#{enterSchoolTime}, major=#{major}, mobile_phone=#{mobilePhone}, email=#{email}, self_image=#{selfImage},
+        create_time=#{createTime},status=#{status}, idol_sum=#{idolSum}, fans_sum=#{fansSum} where user_id=#{userId}
+    </update>
+
+    <select id="selectUserByUserId" resultType="User">
+        select user_id userId, student_id studentId, password, user_name userName, real_name realName,sex,birthday, enter_school_time enterSchoolTime,
+        major, mobile_phone mobilePhone,email, self_image selfImage,create_time createTime,status, idol_sum idolSum, fans_sum fansSum, modify_time modifyTime, deleted
+        from user where user_id = #{userId} and status = 1
+    </select>
+
+
+    <update id="updataStatus">
+        update user set status=#{status} where user_id=#{userId}
+    </update>
+</mapper>

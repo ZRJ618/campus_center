@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ArticleLikeMapper">
+
+    <insert id="insertArticleLike">
+        insert into article_like (user_id,article_id) values (#{userId},#{articleId})
+    </insert>
+
+    <delete id="deleteArticleLike">
+        delete from article_like where user_id = #{userId} and article_id = #{articleId}
+    </delete>
+
+    <select id="selectByUserIdAndArticleId" resultType="ArticleLike">
+        select user_id userId, article_id articleId from article_like where user_id = #{userId} and article_id = #{articleId}
+    </select>
+</mapper>

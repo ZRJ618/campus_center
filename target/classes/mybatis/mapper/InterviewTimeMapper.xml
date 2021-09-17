@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.InterviewTimeMapper">
+    <insert id="addInterviewTimeMapper" parameterType="InterviewTime">
+        insert into interview_time(time_id, student_id, department_name, start_time, end_time, create_time, modify_time)
+        values(#{timeId}, #{studentId}, #{departmentName}, #{startTime}, #{endTime}, #{createTime}, #{modifyTime})
+    </insert>
+    <select id="checkInterviewInfo" resultType="InterviewTime">
+        select * from interview_time where student_id = #{studentId} and start_time = #{startTime} and deleted = 0
+    </select>
+    <select id="getInterviewInfo" resultType="InterviewTimeModel">
+        select * from interview_time where student_id = #{studentId}
+    </select>
+    <select id="getInterviewByTimeId" resultType="InterviewTime">
+        select * from interview_time where time_id = #{timeId}
+    </select>
+    <update id="updateInterview">
+        update interview_time set department_name = #{departmentName}, start_time = #{startTime}, end_time = #{endTime}, modify_time = #{modifyTime} where time_id = #{timeId}
+    </update>
+    <update id="deleteInterviewInfo">
+        update interview_time set deleted = 1 where student_id = #{studentId}, modify_time = #{modifyTime} and department_name = #{departmentName}
+    </update>
+</mapper>

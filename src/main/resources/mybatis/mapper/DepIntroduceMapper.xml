@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.mapper.DepIntroduceMapper">
+    <insert id="addDepIntroduce" parameterType="DepIntroducePojo">
+        insert into dep_introduce(department_id, brief_introduce, work_introduce, recruit, dep_image, charge_one, charge_two,
+         charge_three, create_time, modify_time)
+        values(#{departmentId}, #{briefIntroduce}, #{workIntroduce}, #{recruit}, #{depImage}, #{chargeOne},
+         #{chargeTwo}, #{chargeThree}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <update id="updateChargeOne" parameterType="String">
+        update dep_introduce set charge_one = #{chargeOne}, modify_time = #{modifyTime} where department_id = #{departmentId}
+    </update>
+
+    <update id="updateChargeTow" parameterType="String">
+        update dep_introduce set charge_two = #{chargeTwo}, modify_time = #{modifyTime} where department_id = #{departmentId}
+    </update>
+
+    <update id="updateChargeThree" parameterType="String">
+        update dep_introduce set charge_three = #{chargeThree}, modify_time = #{modifyTime} where department_id = #{departmentId}
+    </update>
+
+    <update id="updateDepIntroduce" parameterType="DepIntroducePojo">
+        update dep_introduce set brief_introduce = #{briefIntroduce}, work_introduce = #{workIntroduce},
+        recruit = #{recruit}, dep_image = #{depImage}, modify_time = #{modifyTime} where department_id = #{departmentId}
+    </update>
+
+
+
+
+    <select id="getDepById" resultType="DepIntroducePojo">
+       select * from dep_introduce where department_id = #{departmentId}
+    </select>
+
+    <delete id="deleteDepInfo">
+        delete from dep_introduce where department_id = #{departmentId}
+    </delete>
+</mapper>

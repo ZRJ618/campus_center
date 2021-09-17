@@ -1,0 +1,6 @@
+1：com.demo.config.WebConfig 中的 addInterceptors() 方法被注释了
+2：com.demo.util.ParamUtil 中的方法体被注释了，返回的是固定值
+
+原因有两个：
+1：和前端对接时有问题，有个接口没有被拦截器放开，无法访问首页（必须要带token）
+2：使用AOP的@aspect做日志记录的时候，在登录页面不应该获取userId

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.QuestionMapper">
+
+    <insert id="insertQuestion">
+        insert into question (question_id,user_id,title,content,create_time,question_image,status)
+        values (#{questionId},#{userId},#{title},#{content},#{createTime},#{questionImage},#{status})
+    </insert>
+
+    <delete id="deleteQuestionLabel">
+        delete from question_label where question_id = #{questionId}
+    </delete>
+
+    <insert id="insertQuestionLabel">
+        insert into question_label (question_id,label_self_add) values (#{questionId},#{label})
+    </insert>
+
+    <update id="updateQuestion">
+        update question set title = #{title}, content = #{content}, question_image = #{questionImage} where question_id = #{questionId}
+    </update>
+
+    <select id="selectQuestion" resultType="Question">
+        select  question_id questionId, user_id userId, title, content, All_answer_like_num allAnswerLikeNum,
+        create_time createTime, question_image questionImage, scan_num scanNum, status from question where question_id = #{questionId} and status = 1
+    </select>
+
+    <select id="selectAllQuestionByUserId" resultType="Question">
+        select question_id questionId, user_id userId, title, content, create_time createTime,
+        All_answer_like_num allAnswerLikeNum, question_image questionImage, scan_num scanNum, status from question where user_id = #{userId} and status = 1
+    </select>
+
+    <select id="selectAllQuestionByUserIdByPage" resultType="Question">
+        select question_id questionId, user_id userId, title, content, create_time createTime,
+        All_answer_like_num allAnswerLikeNum, question_image questionImage, scan_num scanNum, status from question where user_id = #{userId} and status = 1
+        limit #{offSet},#{pageSize}
+    </select>
+
+    <update id="deleteQuestion">
+        update question set status = 0 where question_id = #{questionId}
+    </update>
+
+    <update id="updateAllAnswerLikeNum">
+        update question set All_answer_like_num = #{allAnswerLikeNum} where question_id = #{questionId}
+    </update>
+
+    <update id="updateAllAnswerScanNum">
+        update question set scan_num = #{allAnswerScanNum} where question_id = #{questionId}
+    </update>
+
+    <select id="showHomePage" resultType="Question">
+        select question_id questionId, user_id userId, title, content, create_time createTime, All_answer_like_num allAnswerLikeNum, question_image questionImage, scan_num scanNum, status
+        from question where create_time &gt; #{timestamp} and status = 1 order by all_answer_like_num desc limit 30
+    </select>
+
+</mapper>

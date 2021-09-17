@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ArticleMapper">
+
+
+    <insert id="insertArticle">
+        insert into article (article_id, user_id, title,  content, create_time, like_num,  unlike_num, comment_num, article_image,  status)
+        values (#{articleId},#{userId},#{title},#{content},#{createTime},#{likeNum},#{unlikeNum},#{commentNum},#{articleImage},#{status})
+    </insert>
+
+    <delete id="deleteArticleLabel">
+        delete from article_label where article_id = #{articleId}
+    </delete>
+
+    <insert id="insertArticleLabel">
+        insert into article_label (article_id,label_self_add) values (#{articleId},#{label})
+    </insert>
+
+    <select id="selectArticleById" resultType="Article">
+        select article_id articleId, user_id userId, title,content content,create_time createTime,like_num likeNum,
+         unlike_num unlikeNum,comment_num commentNum,article_image articleImage, scan_num scanNum, status from article where article_id = #{articleId} and status = 1
+    </select>
+
+    <update id="updateArticle">
+        update article set title = #{title}, content = #{content},article_image = #{articleCover}
+        where article_id = #{articleId}
+    </update>
+
+    <select id="selectAllArticle" resultType="Article">
+        select article_id articleId, user_id userId, title,content content,create_time createTime,like_num likeNum,
+         unlike_num unlikeNum,comment_num commentNum,article_image articleImage, scan_num scanNum, status from article where user_id = #{userId} and status = 1
+    </select>
+    
+    <select id="selectWholeArticleId" resultType="String">
+        select article_id articleId from article where status = 1
+    </select>
+
+    <select id="selectAllArticleByPage" resultType="Article">
+        select article_id articleId, user_id userId, title,content content,create_time createTime,like_num likeNum,
+         unlike_num unlikeNum,comment_num commentNum,article_image articleImage, scan_num scanNum, status from article where user_id = #{userId} and status = 1
+        limit #{offSet},#{pageSize}
+    </select>
+
+    <delete id="deleteArticle">
+        update article set status = 0 where article_id = #{articleId}
+    </delete>
+
+    <update id="updateLikeNum">
+        update article set like_num = #{likeNum} where article_id = #{articleId}
+    </update>
+
+    <update id="updateScanNum">
+        update article set scan_num = #{scanNum} where article_id = #{articleId}
+    </update>
+
+</mapper>

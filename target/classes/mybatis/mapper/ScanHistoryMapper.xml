@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ScanHistoryMapper">
+
+    <insert id="insertScanHistory">
+        insert into scan_history (scan_history_id, user_id, article_or_answer_id, create_time, status)
+        values (#{scanHistoryId}, #{userId}, #{articleOrAnswerId}, #{createTime}, 1)
+    </insert>
+
+    <update id="updateStatus">
+        update scan_history set status = 0 where scan_history_id = #{scanHistoryId}
+    </update>
+
+    <select id="showAllByUserIdLimitTime" resultType="ScanHistory">
+        select scan_history_id scanHistoryId, user_id userId, article_or_answer_id articleOrAnswerId, create_time createTime, status
+        from scan_history where user_id = #{userId} and create_time &gt; #{limitTime} and status = 1
+        order by create_time desc
+    </select>
+
+    <select id="showAllByUserIdLimitTimeByPage" resultType="ScanHistory">
+        select scan_history_id scanHistoryId, user_id userId, article_or_answer_id articleOrAnswerId, create_time createTime, status
+        from scan_history where user_id = #{userId} and create_time &gt; #{limitTime} and status = 1
+        order by create_time desc
+        limit #{offSet},#{pageSize}
+    </select>
+
+</mapper>

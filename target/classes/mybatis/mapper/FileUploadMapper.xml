@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.FileUploadMapper">
+
+    <insert id="uploadImagePath" parameterType="ImagePath">
+        insert into imagePath(imageId, imageType, studentId, path, createTime, modifyTime)
+        values(#{imageId}, #{imageType}, #{studentId}, #{path}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <select id="imageDownload" resultType="String">
+        select path from imagePath where studentId = #{id} and imageType = #{imageType}
+    </select>
+
+</mapper>

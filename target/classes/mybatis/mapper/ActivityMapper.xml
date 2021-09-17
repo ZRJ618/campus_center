@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ActivityMapper">
+
+    <insert id="addActivity">
+        insert into activity(activity_id, activity_title, activity_image, total_num, join_num,
+         activity_content, activity_start_time, activity_end_time, recruit_start_time, recruit_end_time,
+          user_id, real_name, activity_object, activity_place, activity_address, activity_type, create_time, modify_time)
+        values(#{activityId}, #{activityTitle}, #{activityImage}, #{totalNum}, #{joinNum},
+         #{activityContent}, #{activityStartTime}, #{activityEndTime}, #{recruitStartTime},
+          #{recruitEndTime},#{userId}, #{realName}, #{activityObject}, #{activityPlace},#{activityAddress},
+           #{activityType}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <select id="getActivityById" resultType="Activity">
+        select * from activity where activity_id = #{activityId} and deleted = 0
+    </select>
+
+    <select id="getActivityPersonalList" resultType="Activity">
+        select * from activity where user_id = #{userId} and deleted = 0
+    </select>
+
+    <select id="getDetailActivityById" resultType="DetailActivity">
+        select * from activity
+           where activity_id = #{activityId} and deleted = 0
+    </select>
+
+    <select id="getActivityList" resultType="Activity">
+        select * from activity where deleted = 0
+        <choose>
+            <when test="activityStatus == '已结束'">
+                and   activity_end_time &lt; #{nowDate}
+            </when>
+            <when test="activityStatus == '进行中'">
+                and activity_end_time &gt; #{nowDate}
+            </when>
+            <when test="activityStatus == '招募中'">
+                and recruit_end_time &gt; #{nowDate}
+            </when>
+        </choose>
+        <if test="activityTitle != null">
+            and  activity_title like "%"#{activityTitle}"%"
+        </if>
+        <if test="activityPlace != null">
+            and activity_place = #{activityPlace}
+        </if>
+        <if test="activityObject != null">
+            and activity_object = #{activityObject}
+        </if>
+        order by create_time desc
+    </select>
+
+    <update id="updateActivity" parameterType="Activity">
+        update activity set  activity_title = #{activityTitle}, activity_image = #{activityImage}, total_num = #{totalNum},
+         join_num = #{joinNum}, activity_content = #{activityContent}, activity_start_time = #{activityStartTime},
+         activity_address = #{activityAddress}, activity_type = #{activityType},
+          activity_end_time = #{activityEndTime}, activity_object = #{activityObject}, activity_place = #{activityPlace}, modify_time = #{modifyTime}
+          where activity_id = #{activityId} and deleted = 0
+    </update>
+
+    <update id="addJoinNum">
+        update activity set join_num  = join_num + 1, modify_time = #{modifyTime} where activity_id = #{activityId} and join_num &lt; total_num
+    </update>
+
+    <update id="subJoinNum">
+        update activity set join_num = join_num - 1, modify_time = #{modifyTime} where activity_id = #{activityId}
+    </update>
+
+    <update id="deleteActivity">
+        update activity set deleted = 1 , modify_time = #{modifyTime} where activity_id = #{activityId} and deleted = 0
+    </update>
+
+
+
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.CollectionArticleMapper">
+
+    <insert id="insertCollection">
+       insert into collection_article (user_id,article_id,status) values (#{userId},#{articleId},1)
+   </insert>
+
+    <update id="updateStatus">
+        update collection_article set status = 0 where user_id = #{userId} and article_id = #{articleId}
+    </update>
+
+    <select id="selectAllArticleByUserId" resultType="CollectionArticle">
+        select user_id userId, article_id articleId from collection_article where user_id = #{userId} and status = 1
+    </select>
+
+    <select id="selectAllArticleByUserIdByPage" resultType="CollectionArticle">
+        select user_id userId, article_id articleId from collection_article where user_id = #{userId} and status = 1
+        limit #{offSet},#{pageSize}
+    </select>
+
+    <select id="selectArticleByUserIdAndArticleId" resultType="CollectionArticle">
+        select user_id userId, article_id articleId from collection_article where user_id = #{userId} and article_id = #{articleId} and status = 1
+    </select>
+</mapper>

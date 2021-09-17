@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.LabelMapper">
+
+    <select id="selectSelfAdd" resultType="Integer">
+        select self_add from label where label = #{label}
+    </select>
+
+    <select id="selectLabel" resultType="String">
+        select label from label where self_add = #{selfAdd}
+    </select>
+
+    <insert id="insert">
+        insert into label (label) values (#{label})
+    </insert>
+
+    <update id="update">
+        update label set label = #{newLabel} where label = #{oldLabel}
+    </update>
+
+    <select id="selectAll" resultType="Label">
+        select label from label
+    </select>
+</mapper>
