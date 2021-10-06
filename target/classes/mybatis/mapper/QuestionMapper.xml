@@ -52,4 +52,9 @@
         from question where create_time &gt; #{timestamp} and status = 1 order by all_answer_like_num desc limit 30
     </select>
 
+    <!--   搜索业务：根据关键词搜索出所有的question   -->
+    <select id="SearchByKeyWord" resultType="Question">
+        select * from question where match(title,content) against(#{keyWord}) limit #{offSet},#{pageSize}
+    </select>
+
 </mapper>

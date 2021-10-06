@@ -50,4 +50,9 @@
         update answer set scan_num = #{scanNum} where answer_id = #{answerId}
     </update>
 
+    <!--   搜索业务：根据关键词搜索出所有的answer   -->
+    <select id="SearchByKeyWord" resultType="Answer">
+        select * from answer where match(content) against(#{keyWord}) limit #{offSet},#{pageSize}
+    </select>
+
 </mapper>

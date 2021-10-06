@@ -1,5 +1,6 @@
 package com.demo.mapper;
 
+import com.demo.pojo.Answer;
 import com.demo.pojo.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -46,5 +47,8 @@ public interface QuestionMapper {
 
     //指定时间之内，按总点赞数进行降序排列，查找所有question（首页）
     List<Question> showHomePage(@Param("timestamp") Timestamp timestamp);
+
+    //搜索业务：根据关键词搜索出所有的question
+    List<Question> SearchByKeyWord(@Param("keyWord") String keyWord, @Param("offSet")int offSet, @Param("pageSize")int pageSize);
 
 }

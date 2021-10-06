@@ -41,4 +41,7 @@ public interface AnswerMapper {
     //将该answer的浏览量加一
     boolean updateScanNum(@Param("scanNum") int scanNum, @Param("answerId") String answerId);
 
+    //搜索业务：根据关键词搜索出所有的answer
+    List<Answer> SearchByKeyWord(@Param("keyWord") String keyWord, @Param("offSet")int offSet, @Param("pageSize")int pageSize);
+
 }
