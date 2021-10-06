@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 17/09/2021 22:46:34
+ Date: 06/10/2021 18:35:46
 */
 
 SET NAMES utf8mb4;
@@ -70,15 +70,23 @@ CREATE TABLE `answer`  (
   INDEX `answer_id`(`answer_id`) USING BTREE,
   INDEX `answer_user_id`(`user_id`) USING BTREE,
   INDEX `answer_question_id`(`question_id`) USING BTREE,
+  FULLTEXT INDEX `content`(`content`) WITH PARSER `ngram`,
   CONSTRAINT `answer_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `answer_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
 INSERT INTO `answer` VALUES (20, 'e92ac980-a093-4000-9444-450b4d2afbed', '151ff010-3ef6-4ddb-9530-c5594eeed29d', '237fd7e7ee414834bc6f6f8a6680f632', '<p>一楼的米饭好吃！！</p><p>一楼的米饭好吃！！</p><p>一楼的米饭好吃！！</p><p>一楼的米饭好吃！！</p><p><br></p><p class=\"ql-align-center\"><img src=\"http://localhost:9090/static/answerImage/13291aa4-71b5-404e-a199-5e63f58a3aa5.jpg\" height=\"228\" width=\"342\"></p><p>一楼的米饭好吃！！</p><p>一楼的米饭好吃！！</p><p>一楼的米饭好吃！！</p><p><br></p>', '2021-05-08 06:59:09', 1, 0, 0, NULL, 1);
-INSERT INTO `answer` VALUES (22, 'df3f340c-7fdc-450c-9803-ab3deb83c8e5', '151ff010-3ef6-4ddb-9530-c5594eeed29d', '237fd7e7ee414834bc6f6f8a6680f632', '<p>二楼的牛肉好吃！！！</p><p>二楼的牛肉好吃！！！</p><p>二楼的牛肉好吃！！！</p><p class=\"ql-align-center\"><img src=\"http://localhost:9090/static/answerImage/4fb1ad0f-7719-49df-ba35-dc8ea1d1d475.jpg\" height=\"247\" width=\"371\"></p><p>二楼的牛肉好吃！！</p>', '2021-05-08 07:03:49', 0, 0, 0, NULL, 1);
+INSERT INTO `answer` VALUES (22, 'df3f340c-7fdc-450c-9803-ab3deb83c8e5', '151ff010-3ef6-4ddb-9530-c5594eeed29d', '237fd7e7ee414834bc6f6f8a6680f632', '<p>二楼的牛肉好吃！！！</p><p>二楼的牛肉好吃！！！</p><p>二楼的牛肉好吃！！！</p><p class=\"ql-align-center\"><img src=\"http://localhost:9090/static/answerImage/4fb1ad0f-7719-49df-ba35-dc8ea1d1d475.jpg\" height=\"247\" width=\"371\"></p><p>二楼的牛好吃肉好吃！！</p>好吃，好吃', '2021-05-08 07:03:49', 0, 0, 0, NULL, 1);
+INSERT INTO `answer` VALUES (23, 'e92ac980-a093-4000-9444-450b4d2afbei', '00211781-24f1-4e65-bc4a-e678625025b7', '9e1ab8a387db47649076d08160e1185b', 'aaaaaa', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (24, 'e92ac980-a093-4000-9444-450b4d2afbel', 'bf48f607-fd8a-43b6-826d-326362629c7f', 'ff561db1ee3c4b07befcfe573de6dba3', 'bbbbbbb', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (25, 'e92ac980-a093-4000-9444-450b4d2afbej', '151ff010-3ef6-4ddb-9530-c5594eeed29d', '62e7978403f84356b7aee08f6a3e813f', 'dfsdfsdfsdfsrrrrr', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (26, 'e92ac980-a093-4000-9444-450b4d2afbeu', 'bf48f607-fd8a-43b6-826d-326362629c7f', 'ff561db1ee3c4b07befcfe573de6dba3', 'bbaaaacccggggggbbbbbb', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (27, 'e92ac980-a093-4000-9444-450b4d2afber', 'bf48f607-fd8a-43b6-826d-326362629c7f', '62e7978403f84356b7aee08f6a3e813f', 'MySQL 内置的修饰符，上面查询最小搜索长度时，搜索结果 ft_boolean_syntax 变量的值就是内置的修饰符，下面简单解释几个，更多修饰符的作用可以查手册', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (28, 'e92ac980-a093-4000-9444-450b4d2afbem', 'b2ec5263-f1a2-452e-b46d-6c93b2b18eba', 'ff561db1ee3c4b07befcfe573de6dba3', '在布尔搜索中，我们可以在查询中自定义某个被搜索的词语的相关性，当编写一个布尔搜索查询时，可以通过一些前缀修饰符来定制搜索。', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `answer` VALUES (29, 'e92ac980-a093-4000-9444-450b4d2afbee', 'b2ec5263-f1a2-452e-b46d-6c93b2b18eba', '9e1ab8a387db47649076d08160e1185b', '自然语言搜索引擎将计算每一个文档对象和查询的相关度。这里，相关度是基于匹配的关键词的个数，以及关键词在文档中出现的次数。在整个索引中出现次数越少的词语，匹配时的相关度就越高。相反，非常常见的单词将不会被搜索，如果一个词语的在超过 50% 的记录中都出现了，那么自然语言的搜索将不会搜索这类词语。上面提到的，测试表中必须有 4 条以上的记录，就是这个原因。一楼', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for answer_like
@@ -121,7 +129,7 @@ CREATE TABLE `article`  (
   INDEX `article_id`(`article_id`) USING BTREE,
   INDEX `article_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `article_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of article
@@ -143,7 +151,7 @@ CREATE TABLE `article_label`  (
   INDEX `a_l_label_self_add`(`label_self_add`) USING BTREE,
   CONSTRAINT `a_l_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`article_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `a_l_label_self_add` FOREIGN KEY (`label_self_add`) REFERENCES `label` (`self_add`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of article_label
@@ -166,7 +174,7 @@ CREATE TABLE `article_like`  (
   `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '此处应为点赞者的userId',
   `article_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'articleId',
   PRIMARY KEY (`self_add`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for collection_answer
@@ -182,7 +190,7 @@ CREATE TABLE `collection_answer`  (
   INDEX `c_a_answer_id`(`answer_id`) USING BTREE,
   CONSTRAINT `c_a_answer_id` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`answer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `c_a_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of collection_answer
@@ -440,7 +448,7 @@ CREATE TABLE `label`  (
   `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标签描述',
   PRIMARY KEY (`self_add`, `label`) USING BTREE,
   INDEX `self_add`(`self_add`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of label
@@ -482,7 +490,7 @@ CREATE TABLE `logger`  (
   `result` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `execution_time` datetime(0) NOT NULL,
   PRIMARY KEY (`logger_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 535 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 559 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of logger
@@ -515,6 +523,26 @@ INSERT INTO `logger` VALUES (535, '237fd7e7ee414834bc6f6f8a6680f632', 'login', '
 INSERT INTO `logger` VALUES (536, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 22:44:50');
 INSERT INTO `logger` VALUES (537, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 22:44:59');
 INSERT INTO `logger` VALUES (538, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 22:44:59');
+INSERT INTO `logger` VALUES (539, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 23:43:27');
+INSERT INTO `logger` VALUES (540, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 23:43:47');
+INSERT INTO `logger` VALUES (541, '237fd7e7ee414834bc6f6f8a6680f632', 'showCollectionAnswer', '237fd7e7ee414834bc6f6f8a6680f632-', '200', '2021-09-17 23:43:48');
+INSERT INTO `logger` VALUES (542, '237fd7e7ee414834bc6f6f8a6680f632', 'login', '1111111111-a1111111111-3423-3423-', '200', '2021-09-17 23:44:15');
+INSERT INTO `logger` VALUES (543, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', 'aaa-1-', '200', '2021-10-06 02:56:03');
+INSERT INTO `logger` VALUES (544, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 03:04:18');
+INSERT INTO `logger` VALUES (545, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 03:05:14');
+INSERT INTO `logger` VALUES (546, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:44:22');
+INSERT INTO `logger` VALUES (547, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:04');
+INSERT INTO `logger` VALUES (548, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:30');
+INSERT INTO `logger` VALUES (549, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:32');
+INSERT INTO `logger` VALUES (550, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:32');
+INSERT INTO `logger` VALUES (551, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:33');
+INSERT INTO `logger` VALUES (552, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:34');
+INSERT INTO `logger` VALUES (553, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:34');
+INSERT INTO `logger` VALUES (554, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:35');
+INSERT INTO `logger` VALUES (555, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:46:37');
+INSERT INTO `logger` VALUES (556, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '你好-1-', '200', '2021-10-06 16:47:13');
+INSERT INTO `logger` VALUES (557, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-1-', '200', '2021-10-06 16:47:18');
+INSERT INTO `logger` VALUES (558, '237fd7e7ee414834bc6f6f8a6680f632', 'searchService', '一楼-2-', '200', '2021-10-06 16:47:30');
 
 -- ----------------------------
 -- Table structure for question
@@ -534,13 +562,14 @@ CREATE TABLE `question`  (
   PRIMARY KEY (`self_add`, `question_id`) USING BTREE,
   INDEX `question_id`(`question_id`) USING BTREE,
   INDEX `q_l_s_a_user_id`(`user_id`) USING BTREE,
+  FULLTEXT INDEX `title`(`title`, `content`) WITH PARSER `ngram`,
   CONSTRAINT `q_l_s_a_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES (27, '00211781-24f1-4e65-bc4a-e678625025b7', 'ff561db1ee3c4b07befcfe573de6dba3', '我们学校的大学生医保卡要怎么领取？', '<p>的方式发送 撒旦发射点发射点</p><p><strong>是对方身上</strong></p><p><strong>士大夫</strong></p><p>大师傅士大夫</p>', NULL, '2021-09-08 06:30:29', NULL, NULL, 1);
+INSERT INTO `question` VALUES (27, '00211781-24f1-4e65-bc4a-e678625025b7', 'ff561db1ee3c4b07befcfe573de6dba3', '我们学校的大学生医保卡要怎么领取？', '<p>的方式发送 撒旦发射点发射点</p><p><strong>是对方身上</strong></p><p><strong>士大夫</strong></p><p>大师傅士大夫一楼</p>', NULL, '2021-09-08 06:30:29', NULL, NULL, 1);
 INSERT INTO `question` VALUES (28, 'bf48f607-fd8a-43b6-826d-326362629c7f', 'ff561db1ee3c4b07befcfe573de6dba3', '第十七届校园辩论赛，赛果如何？', '<p>复苏的速度</p><p>士大夫十分</p><p>撒旦发射点</p><p>士大夫胜多负少</p><p>手动阀手动阀</p><p>地方</p>', NULL, '2021-09-08 06:31:21', NULL, NULL, 1);
 INSERT INTO `question` VALUES (29, 'b2ec5263-f1a2-452e-b46d-6c93b2b18eba', 'ff561db1ee3c4b07befcfe573de6dba3', '听说工学院大三要实训？什么时候开始？', '<p>大师傅似的</p><p>的说法是</p><p>士大夫ds发</p><p>打发士大夫</p><p>大是大非</p>', NULL, '2021-09-08 06:32:52', NULL, NULL, 1);
 INSERT INTO `question` VALUES (30, '151ff010-3ef6-4ddb-9530-c5594eeed29d', '237fd7e7ee414834bc6f6f8a6680f632', '食堂有哪些菜比较好吃，推荐一波？', '<p>食堂有哪些菜比较好吃，推荐一波？食堂有哪些菜比较好吃，推荐一波？</p><p><strong>食堂有哪些菜比较好吃，推荐一波？</strong></p><p>食堂有哪些菜比较好吃，推荐一波？</p><p>食堂有哪些菜比较好吃，推荐一波？食堂有哪些菜比较好吃，推荐一波？</p>', 1, '2021-09-08 06:57:43', NULL, NULL, 1);
@@ -580,7 +609,7 @@ CREATE TABLE `scan_history`  (
   PRIMARY KEY (`self_add`) USING BTREE,
   INDEX `scan_h_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `scan_h_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of scan_history
